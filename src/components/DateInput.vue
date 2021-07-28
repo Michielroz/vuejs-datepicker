@@ -1,7 +1,7 @@
 <template>
   <div :class="{'input-group' : bootstrapStyling}">
     <!-- Calendar Button -->
-    <span v-if="calendarButton" class="vdp-datepicker__calendar-button" :class="{'input-group-prepend' : bootstrapStyling}" @click="showCalendar" v-bind:style="{'cursor:not-allowed;' : disabled}">
+    <span v-if="calendarButton" class="vdp-datepicker__calendar-button" :class="{'input-group-prepend' : bootstrapStyling}" @click="showCalendarOnButtonClick" v-bind:style="{'cursor:not-allowed;' : disabled}">
       <span :class="{'input-group-text' : bootstrapStyling}">
         <i :class="calendarButtonIcon">
           {{ calendarButtonIconContent }}
@@ -23,7 +23,7 @@
       :disabled="disabled"
       :required="required"
       :readonly="!typeable"
-      @click="showCalendar"
+      @click="showCalendarOnInputClick"
       @keyup="parseTypedDate"
       @blur="inputBlurred"
       autocomplete="off">
@@ -101,8 +101,11 @@ export default {
     }
   },
   methods: {
-    showCalendar () {
-      this.$emit('showCalendar')
+    showCalendarOnButtonClick () {
+      this.$emit('showCalendarOnButtonClick')
+    },
+    showCalendarOnInputClick () {
+      this.$emit('showCalendarOnInputClick')
     },
     /**
      * Attempt to parse a typed date

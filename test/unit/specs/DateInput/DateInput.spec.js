@@ -41,9 +41,14 @@ describe('DateInput', () => {
     expect(wrapper.find('input').element.value).toEqual('2016/1/15')
   })
 
-  it('emits showCalendar', () => {
-    wrapper.vm.showCalendar()
-    expect(wrapper.emitted().showCalendar).toBeTruthy()
+  it('emits showCalendarOnInputClick', () => {
+    wrapper.vm.showCalendarOnInputClick()
+    expect(wrapper.emitted().showCalendarOnInputClick).toBeTruthy()
+  })
+
+  it('emits showCalendarOnButtonClick', () => {
+    wrapper.vm.showCalendarOnButtonClick()
+    expect(wrapper.emitted().showCalendarOnButtonClick).toBeTruthy()
   })
 
   it('adds bootstrap classes', () => {

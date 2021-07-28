@@ -22,7 +22,8 @@
       :required="required"
       :bootstrapStyling="bootstrapStyling"
       :use-utc="useUtc"
-      @showCalendar="showCalendar"
+      @showCalendarOnInputClick="showCalendar('input')"
+      @showCalendarOnButtonClick="showCalendar('button')"
       @closeCalendar="close"
       @typedDate="setTypedDate"
       @clearDate="clearDate">
@@ -153,7 +154,9 @@ export default {
     maximumView: {
       type: String,
       default: 'year'
-    }
+    },
+    showCalendarOnInputClick: Boolean,
+    showCalendarOnButtonClick: Boolean
   },
   data () {
     const startDate = this.openDate ? new Date(this.openDate) : new Date()
@@ -244,10 +247,19 @@ export default {
      * Effectively a toggle to show/hide the calendar
      * @return {mixed}
      */
-    showCalendar () {
+    showCalendar (type) {
       if (this.disabled || this.isInline) {
         return false
       }
+
+      if (type === 'input' && this.showCalendarOnInputClick === false) {
+        return false
+      }
+
+      if (type === 'button' && this.showCalendarOnButtonClick === false) {
+        return false
+      }
+
       if (this.isOpen) {
         return this.close(true)
       }
